@@ -10,32 +10,53 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Text,
-  Image,
   ScrollView,
+  FlatList
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Navegacio } from '../../components/navegacio/Navegacio';
 import { Event } from '../../components/event/Event';
 
+const DATA = [
+  {
+    id: '1',
+  },
+  {
+    id: '2',
+  },
+  {
+    id: '3',
+  },
+  {
+    id: '4',
+  },
+  {
+    id: '5',
+  },
+];
+
 class Events extends Component {
   render() {
+    const renderItem = () => (
+      <Event></Event>
+    );
     return (
       <View style={styles.contenidor}>
-          <ScrollView>
-            <View style={{backgroundColor:'#F7F0E8', height: 45, justifyContent: 'center'}}>
-              <Button 
-                buttonStyle={styles.filter}
-                titleStyle={styles.filterText}
-                title='Filter'
-              />
-            </View>
-            <Event></Event>
-            <Event></Event>
-            <Event></Event>
-            <Event></Event>
-          </ScrollView>
-          <Navegacio></Navegacio>
+        <ScrollView>
+          <View style={{ backgroundColor: '#F7F0E8', height: 45, justifyContent: 'center' }}>
+            <Button
+              buttonStyle={styles.filter}
+              titleStyle={styles.filterText}
+              title='Filter'
+            />
+          </View>
+          <FlatList
+            data={DATA}
+            keyExtractor={item => item.id}
+            renderItem={renderItem}
+          />
+        </ScrollView>
+        <Navegacio></Navegacio>
       </View>
     );
   }
@@ -47,7 +68,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   filter: {
-    borderBottomWidth:2,
+    borderBottomWidth: 2,
     backgroundColor: '#E6D6D3',
     borderBottomColor: '#797979',
     fontSize: 12,
